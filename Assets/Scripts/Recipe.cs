@@ -2,7 +2,7 @@ using System;
 
 public enum RecipeType
 {
-    Italian, Eastern, Dutch, Ease, Jamie, Allerhande, Random
+    Italian, Eastern, Dutch, Ease, Jamie, Allerhande, Random, Length
 }
 [Serializable]
 public class Recipe

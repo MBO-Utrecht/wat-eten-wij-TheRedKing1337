@@ -15,36 +15,85 @@ public class WeeklyRecipePlan : MonoBehaviour
     [SerializeField] private RecipeType[] dailyTypes;
     [Header("References")]
     [SerializeField] private Button[] recipeModals;
-    [SerializeField] private Button addNewButton;
     [SerializeField] private Button refreshButton;
+    [SerializeField] private Button preferencesButton;
+    [SerializeField] private Button savePreferencesButton;
+    [SerializeField] private GameObject[] dailyTypeSelectTabs;
 
     private Recipe[] weeklyRecipes;
-    [SerializeField] private RecipeDatabase recipeDatabase;
+    private RecipeDatabase recipeDatabase;
+
+    private enum DaysOfTheWeek
+    {
+        Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    }
 
     private int selectedModal = int.MaxValue; //MaxValue to signify none selected
-    private const string recipeDataPath = "/StreamingAssets/recipes.json";
 
     private void Start()
     {
-        //Get the recipes list from playerPrefs string
-        string filePath = Application.dataPath + recipeDataPath;
-
-        if (File.Exists(filePath))
+        PlayerPrefs.SetInt("FIRSTTIMEOPENING", 1);
+        if (PlayerPrefs.GetInt("FIRSTTIMEOPENING", 1) == 1)
         {
-            string dataAsJson = File.ReadAllText(filePath);
+            Debug.Log("First time startup, loading from resources");
+            //Set first time opening to false
+            PlayerPrefs.SetInt("FIRSTTIMEOPENING", 0);
+
+            //Do your stuff here
+            string dataAsJson = Resources.Load<TextAsset>("recipes").text;
+            recipeDatabase = JsonUtility.FromJson<RecipeDatabase>(dataAsJson);
+        }
+        else
+        {
+            string dataAsJson = PlayerPrefs.GetString("Recipes");
             recipeDatabase = JsonUtility.FromJson<RecipeDatabase>(dataAsJson);
         }
 
         //Init the button onClicks
+        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+        for (int i = 0; i < (int)RecipeType.Length; i++)
+        {
+            options.Add(new TMP_Dropdown.OptionData(((RecipeType)i).ToString()));
+        }
         for (int i = 0; i < 7; i++)
         {
             int index = i;
             recipeModals[i].onClick.AddListener(() => SelectRecipe(index));
+            dailyTypeSelectTabs[i].transform.GetChild(0).GetComponent<TMP_Text>().text = ((DaysOfTheWeek)i).ToString();
+            dailyTypeSelectTabs[i].transform.GetChild(1).GetComponent<TMP_Dropdown>().options = options;
+            dailyTypeSelectTabs[i].transform.GetChild(1).GetComponent<TMP_Dropdown>().value = (int)dailyTypes[i];
         }
-        addNewButton.onClick.AddListener(AddRecipe);
         refreshButton.onClick.AddListener(GenerateWeeklyList);
+        preferencesButton.onClick.AddListener(ShowPreferences);
+        savePreferencesButton.onClick.AddListener(SavePreferences);
 
-        GenerateWeeklyList();
+
+        //load weeklyRecipes from playerPrefs
+        int lastRefresh = PlayerPrefs.GetInt("LastRefresh");
+        int nextWeek = lastRefresh + 604800;
+        if (nextWeek > (int)System.DateTimeOffset.Now.ToUnixTimeSeconds())
+        {
+            weeklyRecipes = new Recipe[7];
+            for (int i = 0; i < 7; i++)
+            {
+                weeklyRecipes[i] = recipeDatabase.recipes.Where(x => x.ID == PlayerPrefs.GetInt("weeklyRecipes" + i)).First();
+            }
+        }
+        else
+        {
+            GenerateWeeklyList();
+        }
+
+        UpdateUI();
+    }
+
+    private void OnDestroy()
+    {
+        //Save weeklyRecipes IDs in playerPrefs
+        for (int i = 0; i < 7; i++)
+        {
+            PlayerPrefs.SetInt("weeklyRecipes" + i, weeklyRecipes[i].ID);
+        }
     }
     public void GenerateWeeklyList()
     {
@@ -69,15 +118,24 @@ public class WeeklyRecipePlan : MonoBehaviour
             {
                 weeklyRecipes[i] = recipesOfDailyType.ElementAt(Random.Range(0, recipesOfDailyType.Count()));
             }
-
+        }
+        PlayerPrefs.SetInt("LastRefresh", (int)System.DateTimeOffset.Now.ToUnixTimeSeconds());
+        UpdateUI();
+    }
+    private void UpdateUI()
+    {
+        for (int i = 0; i < 7; i++)
+        {
             //Update UI
-            recipeModals[i].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = weeklyRecipes[i].name;
-            TMP_InputField description = recipeModals[i].transform.GetChild(0).GetChild(1).GetComponent<TMP_InputField>();
+            recipeModals[i].transform.GetChild(0).GetComponent<TMP_Text>().text = weeklyRecipes[i].name;
+            TMP_Text description = recipeModals[i].transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetComponent<TMP_Text>();
             description.text = weeklyRecipes[i].description;
+            description.ForceMeshUpdate();
             string cookTimeString = "Cook Time: " + weeklyRecipes[i].cookTime + " min.";
-            recipeModals[i].transform.GetChild(0).GetChild(2).GetComponent<TMP_Text>().text = cookTimeString;
-            recipeModals[i].transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeImages/" + weeklyRecipes[i].name);
-            recipeModals[i].transform.GetChild(2).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeTypeImages/" + weeklyRecipes[i].recipeType.ToString());
+            recipeModals[i].transform.GetChild(2).GetComponent<TMP_Text>().text = cookTimeString;
+            recipeModals[i].transform.GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeImages/" + weeklyRecipes[i].name);
+            recipeModals[i].transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeTypeImages/" + weeklyRecipes[i].recipeType.ToString());
+            recipeModals[i].transform.GetChild(5).GetChild(0).GetComponent<TMP_Text>().text = ((DaysOfTheWeek)i).ToString();
         }
     }
     public void SelectRecipe(int id)
@@ -95,42 +153,36 @@ public class WeeklyRecipePlan : MonoBehaviour
         }
         selectedModal = id;
         StartCoroutine(ResizeModal(recipeModals[id].gameObject, 0.25f, 1200));
-
-        //Allow edits
     }
-    public void EditRecipe(int id)
+    public void ShowPreferences()
     {
-
+        dailyTypeSelectTabs[0].transform.parent.gameObject.SetActive(true);
     }
-    public void ShowRecipeAdder()
+    public void SavePreferences()
     {
-
-    }
-    public void AddRecipe()
-    {
-
-
-        SaveRecipes();
+        for (int i = 0; i < 7; i++)
+        {
+            dailyTypes[i] = (RecipeType)dailyTypeSelectTabs[i].transform.GetChild(1).GetComponent<TMP_Dropdown>().value;
+        }
+        dailyTypeSelectTabs[0].transform.parent.gameObject.SetActive(false);
+        GenerateWeeklyList();
     }
     public void SaveRecipes()
     {
         string dataAsJson = JsonUtility.ToJson(recipeDatabase);
 
-        string filePath = Application.dataPath + recipeDataPath;
-        File.WriteAllText(filePath, dataAsJson);
+        PlayerPrefs.SetString("Recipes", dataAsJson);
     }
 
     private IEnumerator ResizeModal(GameObject modal, float time, float newSize)
     {
         LayoutElement layoutElement = modal.GetComponent<LayoutElement>();
-        Scrollbar scrollbar = modal.transform.GetChild(0).GetChild(1).GetChild(1).GetComponent<Scrollbar>();
         float oldSize = layoutElement.preferredHeight;
         float t = 0;
         while (t < 1)
         {
             t += Time.deltaTime / time;
             layoutElement.preferredHeight = Mathf.Lerp(oldSize, newSize, t);
-            scrollbar.value = 0;
             yield return null;
         }
     }
