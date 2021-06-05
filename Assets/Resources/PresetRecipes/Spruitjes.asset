@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Spruitjes
+  m_EditorClassIdentifier: 
+  ID: 1622880158
+  recipeType: 4
+  name: Spruitjes
+  description: "1. Trim the Brussels and peel away any tatty outer leaves, halving
+    any larger ones and keeping the smaller ones whole. Cook in a large pan of boiling
+    salted water for 5 minutes, then drain and leave to steam dry. \n\n2. Melt the
+    butter in a large frying pan on a medium-low heat. Pick and add half the sage
+    leaves, cook for 3 minutes, or until crispy, then tip into a small bowl. \n\n3.
+    Place the pan back on the heat and squeeze the sausage meat from the skins directly
+    into the pan, breaking it up with the back of a spoon. Cook for 3 to 5 minutes,
+    until golden and crispy, while you peel and finely slice the onion, and pick
+    and finely chop the remaining sage. \n\n4. Add the onion and chopped sage to
+    the pan and cook for 5 minutes on a medium-high heat, or until the onions have
+    softened, stirring occasionally. \n\n5. Peel and core the apple, then finely
+    dice. Tip into the pan, and add the sprouts too, then add the Worcestershire
+    sauce and toss until hot through. \n\n6. Transfer to a serving platter, scatter
+    over the crispy sage leaves, and dig in!  \n\nTip: For a veggie-friendly version,
+    swap the sausages for chopped chestnuts, and use anchovy-free Worcestershire
+    sauce."
+  cookTime: 30

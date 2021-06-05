@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Lasagne carbonara
+  m_EditorClassIdentifier: 
+  ID: 1622900098
+  recipeType: 0
+  name: Lasagne carbonara
+  description: "Ingredi\xEBnten 4 personen\r\n\r\n- 250 gram rundergehakt\r\n- 400
+    gram Italiaanse roerbak groentenmix\r\n- 2 fijngekate teentjes knoflook\r\n-
+    1 pak Knorr wereldgerechten Lasagne Carbonara\r\n- 500 mililiter melk\r\n\r\nBereidingswijze\r\nBak
+    de rundergehakt tot dat het bruin geworden is, voeg dan de Italiaanse roerbak
+    groentenmix samen met de fijngehakte teentjes knoflook toe.Voeg het melk en de
+    sausmix Knorr Lasagne Carbonara toe aan het geheel. Breng het alroerend aan kort
+    aan de kook, waarna het vuur uit gedaan moet worden.Schep achtereenvolgend een
+    laagje gehakt in een ovenschaal en leg op het laagje gehakt de lasagne bladen.
+    Waarna weer een laagje gehakt in de ovenschaal wordt gedaan en dan weer de ladganebladen.
+    Herhaal dit proces en zorg er dan voor dat er ge\xEBindigd wordt met een laagje
+    gehakt.Zet de ovenschaal dan voor 35 minuten in de voorverwarmde oven en hierna
+    is de lekkere lasagne carbonara gereed om opgediend te worden.\r\n\r\nServeertip\r\nEr
+    kan er ook voor worden gekozen om na ieder laagje gehakt eerst een laagje geraspte
+    kaas er overheen te strooien en daarna de lasganebladen eroverheen te leggen."
+  cookTime: 50

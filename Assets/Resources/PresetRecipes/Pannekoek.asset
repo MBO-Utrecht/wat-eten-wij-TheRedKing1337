@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Pannekoek
+  m_EditorClassIdentifier: 
+  ID: 1622900431
+  recipeType: 3
+  name: Pannekoek
+  description: "Ingredi\xEBnten 3 personen\r\n\r\n250 g zelfrijzend bakmeel\r\n1/2
+    l melk\r\n2 eieren\r\nzout\r\nboter\r\nbruine suiker\n\nBereidingswijze\r\nDoe
+    het zelfrijzend bakmeel in een kom. Maak in het midden een kuiltje. Doe hierin
+    de eieren en wat melk.\r\nVoeg het zout toe.\r\nRoer nu vanuit het midden het
+    bakmeel bij de melk. Roer alle klontjes eruit en voeg de rest van de melk toe.\r\nLaat
+    de boter in de pan heet worden. Doe hierin een gedeelte van het beslag en bak
+    dit aan beide kanten bruin en gaar.\r\n\r\nServeertip\r\nEet de pannekoeken met
+    wat boter en bruine suiker."
+  cookTime: 20

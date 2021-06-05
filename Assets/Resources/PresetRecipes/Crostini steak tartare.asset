@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Crostini steak tartare
+  m_EditorClassIdentifier: 
+  ID: 1622900871
+  recipeType: 5
+  name: Crostini steak tartare
+  description: "INGREDI\xCBNTEN\r\n2 eieren\r\n1 robuust stokbrood wit\r\n2 el olijfolie\r\n1
+    teen knoflook\r\n1 middelgrote sjalot\r\n20 g bieslook (bakje 25 g)\r\n4 el kappertjes\r\n4
+    el mayonaise\r\n2 ossenworsten (\xE0 200 g)\n\nEieren koken\r\nVerwarm de oven
+    voor op 200 \xBAC. Breng een pan water aan de kook. Voeg als het water kookt
+    de eieren toe en kook in 8 min. hard. Laat schrikken onder koud stromend water
+    en pel ze.\r\n\r\nCrostini maken\r\nSnijd het brood in 16 schuine sneetjes van
+    ca. 1 cm dik. Bestrijk aan beide kanten met de olie, verdeel over een met bakpapier
+    beklede bakplaat en rooster boven in de oven in ca. 10 min. goudbruin. Keer halverwege.
+    Snijd de knoflook doormidden en wrijf het hete brood ermee in.\r\n\r\nSteak tartare
+    maken\r\nHalveer de eieren in de lengte en wip de dooiers eruit. Snijd het eiwit
+    en eigeel afzonderlijk van elkaar fijn. Snijd de sjalot, bieslook en kappertjes
+    fijn.\r\n\r\nCrostini steak tartare maken\r\nBestrijk de crostini met de mayonaise.
+    Haal het velletje van de worsten. Snijd elke worst in 8 gelijke plakken en leg
+    op de crostini. Smeer uit met een mes. Verdeel het eiwit, eigeel, de sjalot,
+    bieslook en kappertjes erover. Breng op smaak met peper en eventueel zout."
+  cookTime: 28

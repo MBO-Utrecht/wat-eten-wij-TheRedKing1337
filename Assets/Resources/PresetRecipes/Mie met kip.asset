@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Mie met kip
+  m_EditorClassIdentifier: 
+  ID: 1622900154
+  recipeType: 1
+  name: Mie met kip
+  description: "Ingredi\xEBnten 4 personen\r\n\r\n1 kipfilet * 2 eetl. oestersaus
+    * 2 eetl. vissaus * 1 eetl. ketjap * 1 theel. palm of rietsuiker * 1/2 grote
+    chillipeper,zonder zaad en fijngehakt * 1/2 theel. geraspte gemberwortel * 175
+    gr. cellofaanmie * 2 eetl. olie * 2 teentjes knoflook, geperst * 1 rode ui, in
+    ringen * korianderblaadjes om te garneren.\n\nVoorbereiding\r\nSnijd de kip in
+    reepjes. vermeng ze in een schaal met de oestersaus, vissaus, ketjap, suiker
+    en gember schep ze om totdat alles bedekt is en laat ze 20 min. marineren.\r\nweek
+    de mie 5 min. in kokend water totdat hij zacht is, giet hem af en zet hem apart.\r\n\r\nBereidingswijze\r\nVerhit
+    de olie in een wok en fruit de knoflook en ui net zacht. voeg kip en marinadevocht
+    toe en roerbak 10 min. of totdat de kip gaar is.\r\nvoeg de mie toe en schep
+    hem om op een laag vuur totdat hij door en door warm is. schep de mie op een
+    achaal en garneer met korianderblaadjes"
+  cookTime: 30

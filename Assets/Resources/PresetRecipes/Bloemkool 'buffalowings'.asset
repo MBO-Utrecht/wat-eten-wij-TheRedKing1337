@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Bloemkool 'buffalowings'
+  m_EditorClassIdentifier: 
+  ID: 1622900761
+  recipeType: 5
+  name: Bloemkool 'buffalowings'
+  description: "4 el\r zonnebloemolie\n2 el maizena\n4el sriracha\r\n\r2el uienpoeder\n800g
+    koelvers bloemkoolroosje\n100g gorgonzola piccante 48+\r\n\r60mg cr\xE8me fra\xEEche\n\nVerwarm
+    de oven voor op 220 \xBAC. Meng de zonnebloemolie, maizena, sriracha en uienpoeder
+    in een grote kom tot een marinade. Snijd de grote bloemkoolroosjes eventueel
+    wat kleiner en meng alle roosjes door de marinade. Schep goed door. Verdeel in
+    een laag over een met bakpapier beklede bakplaat en rooster in ca. 25 min. in
+    het midden van de oven gaar en knapperig. Schep halverwege om.\r\n\r\n2\r\nPrak
+    ondertussen de gorgonzola en cr\xE8me fra\xEEche in een kom fijn met een vork.
+    Voeg de karnemelk toe en roer met een garde tot een gladde dipsaus. Breng op
+    smaak met peper.\r\n\r\n3\r\nHaal de buitenste blaadjes van de kropjes sla los.
+    Was en droog ze en verdeel ze over borden of een schaal. Verdeel de bloemkool-buffalowings
+    erover. Serveer met de dipsaus."
+  cookTime: 25

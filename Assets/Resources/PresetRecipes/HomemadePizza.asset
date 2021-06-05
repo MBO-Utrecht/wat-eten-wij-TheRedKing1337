@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: HomemadePizza
+  m_EditorClassIdentifier: 
+  ID: 1622879231
+  recipeType: 0
+  name: Zelfgemaakte Pizza
+  description: "Ingredi\xEBnten 4 personen\r\n\r\nVoor een heerlijk knapperige pizza:\r\n\r\nVoorbereidingstijd
+    15 minuten, bereidingstijd 20 minuten, wachten 1-2 uur, voor 4 personen\r\n\r\n500
+    gram bloem\r\n250 ml water (lauwwarm)\r\n25 gram verse gist of 10 gram gedroogde
+    gist\r\n3 eetlepels olijfolie\r\n3 theelepels zout (fijn zout, zonder bergje)\r\n1
+    theelepel suiker\n\nBereidingswijze\r\nDeeg maken\r\n\r\nGiet het lauwwarme water
+    in een brede bak of schaal en voeg de gist en suiker toe. Roer goed door, tot
+    de gist egaal verdeeld is. Laat vervolgens een kwartier staan.\r\n\r\nBestuif
+    hem werkblad met wat bloem en maak hierop een bergje van de bloem, of gebruik
+    een grote, brede kom. Meng het zout met de bloem en giet hier het gistmengsel
+    en de olijfolie toe, eventueel in fasen. Kneed het deeg ongeveer 10 minuten tot
+    het een gladde, soepele bal geworden is. Doe de deegbal in een met olijfolie
+    ingevette bak, dek deze af met een vochtige theedoek en zet deze op een warme
+    plek weg, bijvoorbeeld naast de oven of de verwarming, om 1 tot 2 uur te rijzen.
+    Zie voor meer tips en informatie over hoe een goede pizzabodem te maken het artikel
+    hierover.\r\n\r\nVerwarm de oven voor op de hoogst mogelijke temperatuur, bijvoorbeeld
+    250 of 270\xB0 C. Hoe warmer de oven, hoe beter het resultaat en hoe korter de
+    pizza gebakken hoeft te worden.\r\n\r\nMaak de tomatensaus\r\n\r\nMaak een tomatensaus
+    voor pizza, of als je heel weinig tijd hebt, ga voor een snelle versie door de
+    pizza met een dunne laag tomatenpuree te bedekken. Gebruik naar smaak, maar een
+    goede stelregel is ongeveer 80 ml per pizza.\r\n\r\nPizza bedekken\r\n\r\nKneed
+    het deeg, dat nu ongeveer twee keer zo groot gerezen is, nog een keer goed door
+    en verdeel het in de juiste portie per pizza. Rol elke portie uit tot een pizza.
+    In feite geldt: hoe dunner de bodem, hoe lekkerder. Maak de randen iets dikker,
+    zodat de saus er niet afloopt.\r\n\r\nBedek de Italiaanse Pizza met een laag
+    tomatensaus en beleg deze met plakken mozzarella (goed uitgelekt), doe hier vervolgens
+    ingredi\xEBnten naar smaak op, bijvoorbeeld champignons, salami of olijven en
+    doe hier een laagje vers geraspte kaas op, bijvoorbeeld parmezaan, of oude kaas.
+    Bestrooi de pizza met oregano. Lees hier meer over welke ingredi\xEBnten je kan
+    gebruiken voor een lekkere pizza.\r\n\r\nBakken\r\n\r\nZet de pizza op een ingevette
+    bakplaat of ingevet bakpapier in de midden van de oven en bak 15 minuten bij
+    250 \xB0C of 12 minuten bij 270 \xB0C. Als je oven nog heter kan is een kortere
+    tijd voldoende. In principe geldt: hoe heter de oven, hoe beter het resultaat.
+    In de echte houtovens hoeven pizza`s vaak maak 1 of 2 minuten gebakken te worden.
+    Deze bereiken dan ook temperaturen van ruim 400 \xB0C.\r\n\r\nServeertip\r\nTips\r\n\r\nHoe
+    krijg je een pizza met de beste smaak? Wees niet te zuinig met kaas en gebruik
+    bij voorkeur kaas met een sterke smaak, bijvoorbeeld parmezaan of oude kaas.
+    Jonge kaas heeft in principe te weinig smaak. Daarnaast is het erg lekker om
+    pizza`s af te maken met wat goede, gedroogde oregano, of eventueel knoflook of
+    basilicum."
+  cookTime: 40

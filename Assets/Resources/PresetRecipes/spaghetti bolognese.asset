@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: spaghetti bolognese
+  m_EditorClassIdentifier: 
+  ID: 1622899949
+  recipeType: 0
+  name: spaghetti bolognese
+  description: "Ingredi\xEBnten 4 personen\r\n\r\n250 gr rundsgehakt ? 250 gr varkensgehakt
+    ? 100 gr ontbijtspek of rauwe ham, in stukjes gesneden, 1 ui, 1 teentje knoflook,1
+    tak selder, 1 wortel, \xBD liter rode wijn, 100 ml bouillon, 1 blik gepelde tomaten,
+    2 eetlepels tomatenpuree, peper en zout, oregano, basilicum, paprika, rozemarijn,
+    tijm, 1 laurierblad., boter, olijfolie\n\nJe warmt de boter en olijfolie op en
+    fruit daarin de fijngehakte ui, selder en wortel en het teentje knoflook. Dan
+    bak je het gehakt en spek erin met het laurierblaadje. Roer alles goed dooreen,
+    zodat het vlees niet aanbakt. Als het vlees gebakken is haal je het knoflookteentje
+    eruit en doet er de tomaten, wijn,bouillon, tomatenpuree, peper, zout en veel
+    kruiden bij.Dit laat je dan op een heel zacht vuur enkele uren sudderen. Het
+    mag gerust 3 ? 4 uur blijven staan (Begrijp je nu waarom je zo vroeg op moest?).
+    Het is echt wel belangrijk dat de saus zo lang op het vuur staat, zodat alle
+    vocht verdampt is. Voeg er op het laatst de fijngehakte basilicum bij. Haal de
+    pan van het vuur en doe er eventueel nog wat boter bij.\r\nOndertussen kook je
+    de tagliatelle of spaghetti al dente en je giet de rag\xF9 over de pasta."
+  cookTime: 120

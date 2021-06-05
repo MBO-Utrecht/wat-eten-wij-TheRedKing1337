@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: "Perfecte sat\xE9"
+  m_EditorClassIdentifier: 
+  ID: 1622900591
+  recipeType: 3
+  name: "Perfecte sat\xE9"
+  description: "Ingredi\xEBnten 6 personen\r\n\r\n- 1 kilo kipfilet (liefst pootfilet,
+    vraag het de (Biologische) slager, anders borstfilet ) of anders kalkoenfilet\r\n-
+    250 gram ui\r\n- Sambal Badjak (extra heet) of Brandal (geen Oelek!)\r\n- Honing
+    of flinke eetlepel suiker\r\n- 2 tenen knoflook\r\n- 1 citroen\r\n- 1 kop Ketjap
+    (de zoete zoals Manis)\r\n\r\nLET OP!:\r\n\r\nGebruik voor de Sambal en Ketjap
+    GEEN Conimex! Ik gebruik voor de Sambal het merk Koningsvogel en voor de Ketjap
+    de witte plastic flessen uit de Toko of de beter gesorteerde supermarkt. Eigen
+    merken van de Toko zijn vaak ook heel OK.\r\n\r\nVoorbereiding\r\nStap 1\r\n\r\nPureer
+    de uien samen met de 2 tenen knoflook tot moes (belangrijk! Er mogen geen harde
+    stukjes inzitten) in de keukenmachine, dat is makkelijk.\r\n\r\nOf, The old fashioned
+    way: of wrijf de uien en de knoflook fijn in de Oelekan, veel werk .\r\n\r\nDoe
+    het uien en knoflookmengsel in een grote kom/schaal en voeg 1 kop zoete ketjap
+    toe, een scheut honing (mijn voorkeur) of een flinke schep kristalsuiker.\r\n\r\nDaarna
+    de sambal, Badjak en Brandal zijn gebakken sambal en het meest lekker, ik gebruik
+    eigenlijk altijd sambal Badjak (extra heet, want je hebt ze in meerdere vari\xEBteiten).\r\n\r\nHet
+    leuke is nu dat je het zo mild en heet kan maken als je zelf wilt. Maar mijn
+    advies is: begin met een flinke eetlepel, de ervaring leert je of het teveel
+    of te weinig is. Dus, gewoon weer proberen\uFFFD\r\n\r\nHierna voeg je de sap
+    van 1 citroen toe, nu alles goed mengen, als het goed is heb je een mooie homogene,
+    welriekende marinade gemaakt, heerlijk!\r\n\r\nStap 2\r\n\r\nSnijd de kip/kalkoen
+    filet in niet te kleine stukken, liefst stukken van ca. 3 \uFFFD 4 centimeter
+    (blijft sappiger op de BBQ!)\r\n\r\nNu je de marinade klaar hebt doe je de kip/kalkoenstukken
+    bij de marinade en schep je het goed om zodat alle kip/kalkoenstukken bedekt
+    zijn met marinade. Nu zet je de schaal in de koeling (liefst minimaal 6 uur,
+    maar als je honger hebt is een half uur tot \xE9\xE9n uur ook OK, smaak is dan
+    wel minder intens\uFFFD). Het is wel goed om af en toe (een paar keer is genoeg,
+    het moet niet te vermoeiend worden) de kip/kalkoenstukken om te scheppen zodat
+    alle stukjes overal in aanraking komen met de marinade.\r\n\r\nStap 3\r\n\r\nNeem
+    de kip uit de marinade en laat ze uitlekken (vergiet is handig), of, dat doe
+    ik meestal, ga prikken met de grote metalen of bamboe (wel de grote variant)
+    sat\xE9 prikkers en leg de geprikte stokken in een schaal (de overtollige saus
+    druipt er dan vanaf). Ongeveer 3 tot 4 stukken per stok en het vlees niet tegen
+    elkaar aandrukken, ze vinden wat ruimte fijn"
+  cookTime: 20

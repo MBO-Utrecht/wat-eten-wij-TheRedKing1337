@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Griekse Pita met gyros
+  m_EditorClassIdentifier: 
+  ID: 1622900240
+  recipeType: 1
+  name: Griekse Pita met gyros
+  description: "Ingredi\xEBnten 4 personen\r\n\r\nPitabroodjes\r\n20 gram gist (van
+    de bakker)\r\n1/4 liter water\r\n1 tl zout\r\nsnufje suiker\r\n8 el olijfolie\r\n500
+    gram roggebloem\r\n\r\nGyros\r\n600 gram mager varkensvlees of kipfilet\r\nolijfolie\r\ncitroensap\r\n2
+    teentjes knoflook, geperst\r\nzout\r\ngemalen peper\r\noregano\r\nklein beetje
+    dille\r\npaprikapoeder\r\ncayennepeper\r\n\r\nTzaziki\r\n1/2 liter dikke yoghurt\r\n1
+    kleine komkommer\r\n3 teentjes knoflook\r\n2 el azijn\r\npeper en zout\n\nVoorbereiding\r\nHet
+    vlees of de kip marineren kan je het beste natuurlijk een dag van tevoren doen
+    en dit lekker laten intrekken in de koelkast.\r\nMeng voor de marinade de olijfolie,
+    het citroensap, de knoflook, versgemalen peper, zout, oregano, dille, paprikapoeder
+    en cayennepeper goed door elkaar. Voeg het vlees of de kipfilet toe en laat dit
+    goed intrekken (liefst dus een dag van tevoren)\r\n\r\nADVERTISING\r\n\r\nBereidingswijze\r\n\r\nMaak
+    eerst de pitabroodjes:\r\nDe gist verbrokkelen en met het water glad roeren\r\nDe
+    overige ingredienten toevoegen en tot een glad soepel deeg kneden\r\nDaarna 30
+    minuten op een warme plaats, afgedekt, laten rijzen\r\nHet deeg op een met bloem
+    bestoven aanrecht nogmaals kneden\r\nIn gelijke porties verdelen en elk stuk
+    uitrollen tot een circel van ongeveer 18 cm\r\nOp 2 met bakpapier bedekte bakblikken
+    leggen en met een vork een aantal keren inprikken\r\nAfdekken en nog ongeveer
+    15 minuten laten rijzen\r\nOven ondertussen voorverwarmen op 180 graden\r\nDe
+    broodjes met water bestrijken en licht met roggemeel bestuiven\r\nDe pitabroodjes
+    op de bakblikken na elkaar op een rooster in het midden van de oven in 15 minuten
+    gaar bakken\r\nOnder een doek laten afkoelen\r\n\r\nMaak dan de tzaziki\r\nKomkommer
+    schillen, raspen en door de yoghurt mengen\r\nTeentjes knoflook persen en samen
+    met de azijn toevoegen aan de yoghurt\r\nGoed roeren en op smaak brengen met
+    peper en zout\r\n\r\nMaak ten slotte de gyros:\r\nHaal het gemarineerde vlees
+    uit de koelkast\r\nGrill het op de BBQ in ongeveer 8 minuten gaar en bruin (besrijk
+    tussendoor met de marinade)\r\nSnijd het vlees in dunne plakjes\r\nDoe de gyros
+    in de pitabroodjes met wat sla en dunne reepjes ui. Tzaziki erop en klaar"
+  cookTime: 60

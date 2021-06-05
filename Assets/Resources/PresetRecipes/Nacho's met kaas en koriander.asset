@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Nacho's met kaas en koriander
+  m_EditorClassIdentifier: 
+  ID: 1622880275
+  recipeType: 5
+  name: Nacho's met kaas en koriander
+  description: "1  rode ui  \n1 el  jalape\xF1oplakjes in pot  \n2  tomaten  \n200
+    g  tortillachips naturel \n125 g  cr\xE8me fra\xEEche light  \n100 g  geraspte
+    Goudse belegen kaas 48+  \n10 g  verse koriander \n\nVerwarm de oven voor op
+    200 \xB0C. Snijd de ui in ringen, de jalape\xF1oplakjes fijn en de tomaten in
+    kwarten. Verwijder de zaadjes van de tomaten en snijd het vruchtvlees in kleine
+    blokjes.  2 Verdeel de tortillachips over de ovenschaal. Schep de cr\xE8me fra\xEEche
+    erop en verdeel de ui, jalape\xF1o en tomaat erover. Bestrooi met de geraspte
+    kaas en zet ca. 7 min. in de oven tot de kaas gesmolten is. Haal de blaadjes
+    van de takjes koriander en strooi erover."
+  cookTime: 18

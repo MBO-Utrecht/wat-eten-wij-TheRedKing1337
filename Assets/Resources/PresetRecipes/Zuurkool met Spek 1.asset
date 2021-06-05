@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Zuurkool met Spek 1
+  m_EditorClassIdentifier: 
+  ID: 1622880062
+  recipeType: 2
+  name: Zuurkool met spek
+  description: "BEVAT PER PORTIE 115 kcal 8 g eiwit 9 g vet 2 g koolhydraten \n\nINGREDI\xCBNTEN
+    \n100 g gerookte spekblokjes \n500 g zuurkool, uitgelekt \n1 theelepel karwijzaad
+    \n1 eetlepel bieslook, fijngehakt \n\nBEREIDEN Bak de spekblokjes in een braadpan
+    zachtjes uit. Schep de spekjes op een bordje.  Schep de zuurkool met karwijzaad
+    door het spekvet en smoor de zuurkool in ca. 20 minuten zachtjes gaar. Strooi
+    de spekjes en het bieslook erover."
+  cookTime: 30

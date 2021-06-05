@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Pasta pesto met kip
+  m_EditorClassIdentifier: 
+  ID: 1622892579
+  recipeType: 0
+  name: Pasta pesto met kip
+  description: "4 personen\r\n\r\n300 gr pasta\r\n400 gr kipfilet (in stukjes)\r\n1
+    ui\r\n250 ml room\r\n250 gr cherry tomaatjes\r\npeper en zout\r\nscheutje olijfolie\r\n60
+    gr pijnboompitten (geroosterd)\r\nHandje rucola\r\n4 eetlepels pesto ( zelfgemaakte
+    pesto of kant en klaar)\n\nBereiding\r\n\r\n\r\n Snipper het uitje en fruit even
+    aan in een scheutje olijfolie. Voeg de blokjes kip toe en bak ongeveer 5 minuten.
+    Kook ondertussen de pasta gaar. Voeg de (zelfgemaakte) pesto en room toe aan
+    de kip en roer goed door. Proef nog even of er nog peper of zout bij moet.\r\n\r\npasta_pesto_met_kip_01.jpgpasta_pesto_met_kip_02.jpgpasta_pesto_met_kip_03.jpgpasta_pesto_met_kip_04.jpg\r\n\r\n 
+    Laat de pestosaus een paar minuutjes zachtjes pruttelen. Voeg dan de gekookte
+    pasta toe en schep er doorheen. Halveer de tomaatjes en roer ook door de pasta
+    pesto en verwarm nog een minuutje mee. Serveer de pasta pesto in de pan of op
+    een bord met een handje rucola en de geroosterde pijnboompitten.\r\n\r\n\r\nTip:
+    deze pasta pesto is ook lekker met geraspte kaas. Gebruik ook eens stukjes vegetarische
+    kip voor een vegetarische variant op de kip pesto.\r\n\r\n"
+  cookTime: 25

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Moreish aubergine salad
+  m_EditorClassIdentifier: 
+  ID: 1622900668
+  recipeType: 4
+  name: Moreish aubergine salad
+  description: "Ingredients\r\n2 aubergines , (250g each)\r\n1 bunch of mint , (30g)\r\n20
+    g skin-on almonds\r\n1 lemon\r\n1 tablespoon runny honey\r\nextra virgin olive
+    oil\r\n8 mixed-colour olives , (stone in)\r\n40 g feta cheese\r\n100 g bag of
+    mixed salad\n\nPreheat the oven to 180\xB0C/350\xB0F/gas 4. Prick the aubergines
+    and place directly on the bars of the oven. Roast for 50 minutes, or until beautifully
+    soft, tender and juicy.\r\n\r\nPick the baby mint leaves and put aside. Pick
+    the rest of the leaves into a pestle and mortar, then add the almonds and roughly
+    crush and pound together. Finely grate in the lemon zest, squeeze in the juice,
+    and muddle in with the honey and 2 tablespoons of extra virgin olive oil. Squash
+    and destone the olives, tear the flesh into the mix, and crumble in the feta.
+    Mix it all together, then season to perfection with black pepper. Divide the
+    salad and baby mint leaves between your plates. Slice the soft aubergines down
+    the middle and place on top, then smother with the incredible, moreish pesto-style
+    dressing. I like to attack the whole thing, chopping, tossing and mixing everything
+    together as I tuck in. Delicious hot or cold."
+  cookTime: 55

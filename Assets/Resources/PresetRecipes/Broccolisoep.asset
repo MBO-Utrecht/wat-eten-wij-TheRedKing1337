@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Broccolisoep
+  m_EditorClassIdentifier: 
+  ID: 1622892675
+  recipeType: 2
+  name: Broccolisoep
+  description: "Ingredi\xEBnten\r\n\r\n4 personen\r\n\r\nScheutje olijfolie\r\n2
+    sjalotjes of 1 ui\r\ngroentebouillon blokjes\r\n500 gr broccoli\r\n200 ml creme
+    fraiche of kookroom\r\nVerse bieslook of bosui om te garneren\r\nBereiding\r\n\r\n\r\nVerhit
+    de olie in een soeppan. Fruit de gesnipperde sjalotjes of ui 2 minuten. Voeg
+    de broccoli in roosjes toe en vervolgens 1 liter water en breng aan de kook.
+    Voeg de groentebouillonblokjes en wat bieslook toe aan het water en laat 10 tot
+    12 min koken.\r\n\r\n\r\n Pureer de soep met een staafmixer glad. Roer ca. 2
+    eetlepels creme fraiche er door of de helft van de kookroom. Serveer de broccolisoep
+    met wat extra cr\xE8me fraiche of kookroom en verse bieslook.\r\n\r\n\r\n Tip:
+    ik gebruik altijd 1 groentebouillonblokje voor 1 liter water en breng de soep
+    daarna zelf nog eventueel op smaak met een beetje peper en zout. De broccolisoep
+    is ook lekker met wat gebakken spekjes of gerookte zalm.\n"
+  cookTime: 30

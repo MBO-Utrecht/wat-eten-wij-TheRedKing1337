@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Nasi
+  m_EditorClassIdentifier: 
+  ID: 1622880018
+  recipeType: 1
+  name: Nasi
+  description: "Dit is de beroemde nasi goreng van de Koninklijke Marine. \n\nINGREDIENTEN
+    \n500 gram rijst \n200 gram varkens- of kippenvlees in blokjes zonnebloemolie
+    om te bakken \n3 geklutste eieren evt. \n50 gram garnalen (hoeft niet mag wel
+    \n150 gram mager gerookt spek in reepjes \n150 gram magere ham in blokjes \\n1
+    prei in ringen gesneden \n2 grote uien gesneden in niet te kleine stukjes \n4
+    teentjes knoflook fijngehakt \nEn naar smaak: lombok of sambal oelek, trassi
+    en zout \nEn als je de nasi opbakt een klein beetje maggi (flesje)  \n\nVoorbereiding
+    \nGebruik een uitstekende kwaliteit droogkokende rijst, anders loop je de kans
+    dat de nasi nat en klef wordt en zich slecht laat bakken. Kook de rijst gaar
+    en droog. Van de geklutse eieren omeletten bakken en in reepjes snijden. Het
+    vlees bestrooien met zout en peper.  Bereidingswijze Verhit een beetje olie in
+    de wok en bak het varkensvlees of kippenvlees krokant en schep het uit de olie.
+    Bak nu de in reepjes gesneden gerookt spek krokant en deponeer dit naast het
+    gebakken vlees. Bak de gesneden uien in dezelfde olie en laat deze na het uitscheppen
+    uitlekken in een kopje of kommetje. Verwijder nu een groot deel van de olie uit
+    de wok maar zorg dat er ca. 2 eetlepels achterblijven. Nu bak je de knoflook
+    en een beetje trassi tesamen in dezelfde olie en voeg de gekookte rijst toe.
+    Onder voortdurend roeren bak je de rijst op een niet te hoog vuur. De rijst krijgt
+    al een beetje kleur. Voeg nu een theelepeltje sambal oelek en een klein beetje
+    maggi toe. Voeg eventueel naar smaak wat zout toe. Voeg nu het varkens- of kippenvlees
+    toe met de uitjes zet het vuur op een laag pitje en bak het vlees even mee. Meng
+    nu de ham en de reepjes ei onder de nasi en als goed in de rijst is verdeeld
+    de in ringetjes gesneden prei ( evt. de garnalen) erbij. Vergeet niet om tijdens
+    het bakken wat maggi toe te voegen omdat dit een extra lekkere smaak geeft. \nNu
+    is de nasi klaar."
+  cookTime: 30

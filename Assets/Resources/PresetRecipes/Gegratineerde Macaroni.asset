@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e76fede5ffdd146920a55f17ec10fa, type: 3}
+  m_Name: Gegratineerde Macaroni
+  m_EditorClassIdentifier: 
+  ID: 1622900047
+  recipeType: 0
+  name: Gegratineerde Macaroni
+  description: "Ingredi\xEBnten 4 personen\r\n\r\n1 pakje Honig mix voor Macaroni
+    en Spaghetti\r\n350 gr. Elleboogjes macaroni\r\n350 gr. gesneden groenten (prei,
+    ui, paprika, broccoli, tomaat) of een kant en klaar Italiaans groentepakket\r\n300
+    gr. gehakt\r\n150 gr. geraspte kaas (belegen)\r\n150 gr. kruiden roomkaas\n\nVoorbereiding\r\nVerwarm
+    de grill of oven voor op de hoogste stand.\r\n\r\nBereidingswijze\r\nBak het
+    gehakt snel rul en bruin, voeg op het laatst de groenten toe en bak deze even
+    mee.\r\nKook ondertussen de macaroni volgens de algemene bereidingswijze (al
+    dente).\r\nVoeg 1,5 dl. water en de mix toe aan het gehaktmengsel en kook dit
+    1 minuut.\r\nMeng de kruidenkaas met het gehaktmengsel en de macaroni.\r\nVet
+    een ovenschaal in en verdeel de macaroni hierin.\r\nBestrooi het geheel met de
+    geraspte kaas en gratineer de schotel tot deze bruin is."
+  cookTime: 30
