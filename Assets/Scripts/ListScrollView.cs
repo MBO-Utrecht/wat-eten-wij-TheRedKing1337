@@ -116,8 +116,7 @@ public class ListScrollView: MonoBehaviour
         float toShiftHeight = elements[arrayPosition].transform.localPosition.y + elementBufferHeight;
 
         toShift.transform.localPosition = new Vector2(toShift.transform.localPosition.x, toShiftHeight);
-        infoScript.FillWithInfo(toShift, currentPosition);
-
+        infoScript.FillWithInfo(toShift, currentPosition-1);
 
         arrayPosition = ClampToArraySize(arrayPosition - 1, elements.Length);
     }
@@ -134,7 +133,7 @@ public class ListScrollView: MonoBehaviour
         float toShiftHeight = elements[ClampToArraySize(arrayPosition + elements.Length - 1, elements.Length)].transform.localPosition.y - elementBufferHeight;
 
         toShift.transform.localPosition = new Vector2(toShift.transform.localPosition.x, toShiftHeight);
-        infoScript.FillWithInfo(toShift, currentPosition);
+        infoScript.FillWithInfo(toShift, currentPosition+elements.Length-1);
 
         arrayPosition = ClampToArraySize(arrayPosition + 1, elements.Length);
     }

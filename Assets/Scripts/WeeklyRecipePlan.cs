@@ -27,11 +27,12 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
     [SerializeField] private GameObject weeklyCanvas;
 
     private GameObject[] recipeListModals;
+    private float modalHeight;
 
     private Recipe[] weeklyRecipes;
     private List<Recipe> presetRecipes = new List<Recipe>();
     private RecipeDatabase recipeDatabase;
-    private List<Recipe> combinedList = new List<Recipe>();
+    [SerializeField] private List<Recipe> combinedList = new List<Recipe>();
 
     private enum DaysOfTheWeek
     {
@@ -47,7 +48,7 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
 
         string dataAsJson = PlayerPrefs.GetString("Recipes");
         recipeDatabase = JsonUtility.FromJson<RecipeDatabase>(dataAsJson);
-        if(recipeDatabase is null)
+        if (recipeDatabase is null)
         {
             recipeDatabase = new RecipeDatabase();
         }
@@ -83,12 +84,13 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         refreshButton.onClick.AddListener(GenerateWeeklyList);
         preferencesButton.onClick.AddListener(ShowPreferences);
         savePreferencesButton.onClick.AddListener(SavePreferences);
-        addNewButton.onClick.AddListener(() => { recipeListCanvas.transform.GetChild(1).gameObject.SetActive(true); });
+        addNewButton.onClick.AddListener(() => { recipeListCanvas.transform.GetChild(1).gameObject.SetActive(!recipeListCanvas.transform.GetChild(1).gameObject.activeSelf); });
         recipeListCanvas.transform.GetChild(1).GetChild(5).GetComponent<Button>().onClick.AddListener(SaveNewRecipe);
 
         //Init the recipe list and give its modals events
         recipeListModals = recipeScollView.InitElements(this, combinedList.Count);
-        for(int i = 0; i < recipeListModals.Length; i++)
+        modalHeight = recipeListModals[0].GetComponent<RectTransform>().rect.height;
+        for (int i = 0; i < recipeListModals.Length; i++)
         {
             int index = i;
             recipeListModals[i].GetComponent<Button>().onClick.AddListener(() => SelectRecipeList(index));
@@ -139,15 +141,6 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
             addNewButton.gameObject.SetActive(true);
         }
     }
-
-    private void OnDestroy()
-    {
-        //Save weeklyRecipes IDs in playerPrefs
-        for (int i = 0; i < 7; i++)
-        {
-            PlayerPrefs.SetInt("weeklyRecipes" + i, weeklyRecipes[i].ID);
-        }
-    }
     public void GenerateWeeklyList()
     {
         //Get array of random recipes based on the daily types
@@ -173,6 +166,11 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
             }
         }
         PlayerPrefs.SetInt("LastRefresh", (int)System.DateTimeOffset.Now.ToUnixTimeSeconds());
+        //Save weeklyRecipes IDs in playerPrefs
+        for (int i = 0; i < 7; i++)
+        {
+            PlayerPrefs.SetInt("weeklyRecipes" + i, weeklyRecipes[i].ID);
+        }
         UpdateUI();
     }
     private void UpdateUI()
@@ -209,7 +207,6 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
     }
     public void SelectRecipeList(int id)
     {
-        float modalHeight = recipeListModals[0].GetComponent<RectTransform>().rect.height;
         if (selectedListModal == id)
         {
             StartCoroutine(ResizeModal(recipeListModals[selectedListModal].gameObject, 0.2f, modalHeight));
@@ -276,7 +273,7 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
     {
         Transform inputPanel = recipeListCanvas.transform.GetChild(1);
         string name = inputPanel.GetChild(0).GetComponent<TMP_InputField>().text;
-        RecipeType recipeType =(RecipeType)inputPanel.GetChild(1).GetComponent<TMP_Dropdown>().value;
+        RecipeType recipeType = (RecipeType)inputPanel.GetChild(1).GetComponent<TMP_Dropdown>().value;
         string description = inputPanel.GetChild(2).GetComponent<TMP_InputField>().text;
         int cookTime = int.Parse(inputPanel.GetChild(3).GetComponent<TMP_InputField>().text);
 
