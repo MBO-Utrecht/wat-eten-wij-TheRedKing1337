@@ -20,19 +20,18 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
     [SerializeField] private Button preferencesButton;
     [SerializeField] private Button savePreferencesButton;
     [SerializeField] private Button addNewButton;
+    [SerializeField] private TMP_Dropdown sortDropdown;
     [SerializeField] private GameObject[] dailyTypeSelectTabs;
     [SerializeField] private ListScrollView recipeScollView;
 
     [SerializeField] private GameObject recipeListCanvas;
     [SerializeField] private GameObject weeklyCanvas;
 
-    private GameObject[] recipeListModals;
-    private float modalHeight;
-
     private Recipe[] weeklyRecipes;
     private List<Recipe> presetRecipes = new List<Recipe>();
     private RecipeDatabase recipeDatabase;
-    [SerializeField] private List<Recipe> combinedList = new List<Recipe>();
+    private List<Recipe> combinedList = new List<Recipe>();
+    private List<Recipe> previewList = new List<Recipe>();
 
     private enum DaysOfTheWeek
     {
@@ -69,9 +68,14 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
         for (int i = 0; i < (int)RecipeType.Length; i++)
         {
-            options.Add(new TMP_Dropdown.OptionData(((RecipeType)i).ToString()));
+            options.Add(new TMP_Dropdown.OptionData(((RecipeType)i).ToString(), Resources.Load<Sprite>("RecipeTypeImages/" + ((RecipeType)i).ToString())));
         }
         recipeListCanvas.transform.GetChild(1).GetChild(1).GetComponent<TMP_Dropdown>().options = options;
+        options.RemoveAt(options.Count-1);
+        options.Add(new TMP_Dropdown.OptionData("None"));
+        sortDropdown.options = options;
+        sortDropdown.value = (int)RecipeType.Random;
+        sortDropdown.onValueChanged.AddListener(SortPreviewList);
         for (int i = 0; i < 7; i++)
         {
             int index = i;
@@ -88,13 +92,8 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         recipeListCanvas.transform.GetChild(1).GetChild(5).GetComponent<Button>().onClick.AddListener(SaveNewRecipe);
 
         //Init the recipe list and give its modals events
-        recipeListModals = recipeScollView.InitElements(this, combinedList.Count);
-        modalHeight = recipeListModals[0].GetComponent<RectTransform>().rect.height;
-        for (int i = 0; i < recipeListModals.Length; i++)
-        {
-            int index = i;
-            recipeListModals[i].GetComponent<Button>().onClick.AddListener(() => SelectRecipeList(index));
-        }
+        previewList = combinedList;
+        recipeScollView.InitElements(this, previewList.Count);
 
         recipeListCanvas.SetActive(false);
         weeklyCanvas.SetActive(true);
@@ -130,6 +129,7 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
             preferencesButton.gameObject.SetActive(true);
             refreshButton.gameObject.SetActive(true);
             addNewButton.gameObject.SetActive(false);
+            sortDropdown.gameObject.SetActive(false);
         }
         else
         {
@@ -139,6 +139,7 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
             preferencesButton.gameObject.SetActive(false);
             refreshButton.gameObject.SetActive(false);
             addNewButton.gameObject.SetActive(true);
+            sortDropdown.gameObject.SetActive(true);
         }
     }
     public void GenerateWeeklyList()
@@ -205,22 +206,6 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         selectedModal = id;
         StartCoroutine(ResizeModal(recipeModals[id].gameObject, 0.25f, 1200));
     }
-    public void SelectRecipeList(int id)
-    {
-        if (selectedListModal == id)
-        {
-            StartCoroutine(ResizeModal(recipeListModals[selectedListModal].gameObject, 0.2f, modalHeight));
-            selectedListModal = int.MaxValue;
-            return;
-        }
-        //Use anim to grow recipe box to fullscreen
-        if (selectedListModal != int.MaxValue)
-        {
-            StartCoroutine(ResizeModal(recipeListModals[selectedListModal].gameObject, 0.2f, modalHeight));
-        }
-        selectedListModal = id;
-        StartCoroutine(ResizeModal(recipeListModals[id].gameObject, 0.25f, 1200));
-    }
     public void ShowPreferences()
     {
         dailyTypeSelectTabs[0].transform.parent.gameObject.SetActive(!dailyTypeSelectTabs[0].transform.parent.gameObject.activeSelf);
@@ -260,14 +245,14 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
 
     public void FillWithInfo(GameObject toFill, int index)
     {
-        toFill.transform.GetChild(0).GetComponent<TMP_Text>().text = combinedList[index].name;
+        toFill.transform.GetChild(0).GetComponent<TMP_Text>().text = previewList[index].name;
         TMP_Text description = toFill.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetComponent<TMP_Text>();
-        description.text = combinedList[index].description;
+        description.text = previewList[index].description;
         LayoutRebuilder.ForceRebuildLayoutImmediate(description.transform.parent.GetComponent<RectTransform>());
-        string cookTimeString = "Cook Time: " + combinedList[index].cookTime + " min.";
+        string cookTimeString = "Cook Time: " + previewList[index].cookTime + " min.";
         toFill.transform.GetChild(2).GetComponent<TMP_Text>().text = cookTimeString;
-        toFill.transform.GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeImages/" + combinedList[index].name);
-        toFill.transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeTypeImages/" + combinedList[index].recipeType.ToString());
+        toFill.transform.GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeImages/" + previewList[index].name);
+        toFill.transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeTypeImages/" + previewList[index].recipeType.ToString());
     }
     public void SaveNewRecipe()
     {
@@ -281,5 +266,12 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         recipeDatabase.AddNew(recipe);
 
         inputPanel.gameObject.SetActive(false);
+    }
+    public void SortPreviewList(int previewType)
+    {
+        if (previewType == (int)RecipeType.Random) previewList = combinedList;
+        else previewList = combinedList.Where(x => x.recipeType == (RecipeType)previewType).ToList();
+
+        recipeScollView.InitElements(this, previewList.Count);
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +11,12 @@ public interface IListScollViewController
 /// It also recycles the elements in the list
 /// </summary>
 [RequireComponent(typeof(ScrollRect))]
-public class ListScrollView: MonoBehaviour 
+public class ListScrollView : MonoBehaviour
 {
     [SerializeField] private float elementsInView = 5;
     [SerializeField] private float padding = 5;
     [SerializeField] private int bufferSize = 1;
+    [SerializeField] private float previewScaleSpeed = 0.2f;
     [SerializeField] private GameObject elementPrefab;
 
     private IListScollViewController infoScript;
@@ -26,10 +26,19 @@ public class ListScrollView: MonoBehaviour
     private int currentPosition = 0; //The ID of the top element
     private int arrayPosition = 0;
     private float elementBufferHeight;
+    private RectTransform rectTransform;
+    private RectTransform viewport;
+    private RectTransform previewModal;
+
+    private float bottomEdge, topEdge, oldPosition, previewModalReturnPos;
 
     private void Awake()
     {
         content = transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
+        rectTransform = GetComponent<RectTransform>();
+        viewport = transform.GetChild(0).GetComponent<RectTransform>();
+        previewModal = transform.GetChild(0).GetChild(1).gameObject.GetComponent<RectTransform>();
+        previewModal.GetComponent<Button>().onClick.AddListener(HidePreviewModal);
         GetComponent<ScrollRect>().onValueChanged.AddListener(CheckBounds);
     }
 
@@ -44,7 +53,7 @@ public class ListScrollView: MonoBehaviour
             {
                 Destroy(elements[i]);
             }
-        }       
+        }
         //Gets the amount of prefabs to place, all in view + top/bottom buffer
         int elementsToPlace = Mathf.CeilToInt(elementsInView) + bufferSize + bufferSize;
         elements = new GameObject[elementsToPlace];
@@ -53,7 +62,7 @@ public class ListScrollView: MonoBehaviour
         float baseOffset = -(elementHeight / 2 + padding);
 
         //Check if there arent too many elements
-        if(elementsToPlace > elementCount)
+        if (elementsToPlace > elementCount)
         {
             elementsToPlace = elementCount;
         }
@@ -68,7 +77,8 @@ public class ListScrollView: MonoBehaviour
             rt.offsetMax = new Vector2(0, rt.offsetMax.y);
             rt.offsetMin = new Vector2(0, rt.offsetMin.y);
             rt.sizeDelta = new Vector2(0, elementHeight);
-            element.GetComponent<LayoutElement>().preferredHeight = elementHeight;
+            int index = i;
+            element.GetComponent<Button>().onClick.AddListener(() => ShowPreviewModal(index, index));
 
             elements[i] = element;
 
@@ -76,70 +86,131 @@ public class ListScrollView: MonoBehaviour
             infoScript.FillWithInfo(element, i);
         }
 
+        bottomEdge = rectTransform.position.y + rectTransform.rect.yMin * transform.root.localScale.y - elementBufferHeight * bufferSize;
+        topEdge = rectTransform.position.y + rectTransform.rect.yMax * transform.root.localScale.y + elementBufferHeight * bufferSize;
+
         //Resize the content
         content.sizeDelta = new Vector2(content.sizeDelta.x, (elementBufferHeight) * elementCount);
+        content.transform.position = new Vector3(content.transform.position.x, 0, 0);
 
         return elements;
     }
+    public void ShowPreviewModal(int arrayIndex, int positionIndex)
+    {
+        infoScript.FillWithInfo(previewModal.gameObject, positionIndex); //Set info
+        previewModal.gameObject.SetActive(true); //Enable object
+        previewModal.transform.position = elements[arrayIndex].transform.position; //Set position to element position
+        previewModalReturnPos = elements[arrayIndex].transform.position.y; //Set return position for when closing
+        StartCoroutine(ScalePreviewModal(elementBufferHeight, viewport.rect.height, transform.position.y, false));
+    }
+    public void HidePreviewModal()
+    {
+        StartCoroutine(ScalePreviewModal(viewport.rect.height, elementBufferHeight, previewModalReturnPos, true));
+    }
+    private IEnumerator ScalePreviewModal(float startHeight, float endHeight, float targetHeightPos, bool toggleAtEnd)
+    {
+        float t = 0;
+        float startHeightPos = previewModal.transform.position.y;
+        while (previewModal.rect.height != endHeight)
+        {
+            t += Time.deltaTime / previewScaleSpeed;
+            previewModal.sizeDelta = new Vector2(previewModal.sizeDelta.x, Mathf.Lerp(startHeight, endHeight, t));
+            float heightPos = Mathf.Lerp(startHeightPos, targetHeightPos, t);
+            previewModal.transform.position = new Vector3(previewModal.transform.position.x, heightPos, 0);
+            yield return null;
+        }
+        if (toggleAtEnd)
+            previewModal.gameObject.SetActive(false);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(new Vector3(0, bottomEdge, 0), new Vector3(1000, bottomEdge, 0));
+        Gizmos.DrawLine(new Vector3(0, topEdge, 0), new Vector3(1000, topEdge, 0));
+        Gizmos.DrawCube(rectTransform.transform.position, Vector3.one);
+    }
     private void CheckBounds(Vector2 position)
     {
-        float height = content.transform.localPosition.y + elementBufferHeight;
-        int newPosition = Mathf.FloorToInt(height / elementBufferHeight);
-        //if the index has changed
-        if (currentPosition != newPosition)
+        //float height = content.transform.localPosition.y + elementBufferHeight;
+        //currentPosition = Mathf.FloorToInt(height / elementBufferHeight);
+        //arrayPosition = currentPosition % elements.Length;
+        //if (currentPosition == newPosition) return;
+        bool isUp = oldPosition > content.transform.localPosition.y;
+        oldPosition = content.transform.localPosition.y;
+        if (isUp)
         {
-            ShiftElements(newPosition);
+            //While bottom element is too low
+            while (elements[ClampToArraySize(arrayPosition + elements.Length - 1, elements.Length)].transform.position.y < bottomEdge)
+            {
+                if (IsAtTop())
+                {
+                    return;
+                }
+                ShiftUp();
+            }
         }
-    }
-    private void ShiftElements(int newPosition)
-    {
-        int delta = Mathf.Abs(currentPosition - newPosition);
-        //For each element to shift
-        for (int i = 0; i < delta; i++)
+        else
         {
-            bool isUp = currentPosition > newPosition;
-            if (isUp) ShiftUp();
-            else ShiftDown();
-            currentPosition += isUp ? -1 : 1;
+            //While top element is too high
+            while (elements[arrayPosition].transform.position.y > topEdge)
+            {
+                if (IsAtBottom())
+                {
+                    return;
+                }
+                ShiftDown();
+            }
         }
     }
     private void ShiftUp()
     {
-        if (IsOOB())
-        {
-            return;
-        }
         Debug.Log("shifting UP");
 
         //Get bottom element
-        GameObject toShift = elements[ClampToArraySize(arrayPosition + elements.Length - 1, elements.Length)];
+        int localArrayIndex = ClampToArraySize(arrayPosition + elements.Length - 1, elements.Length);
+        GameObject toShift = elements[localArrayIndex];
         float toShiftHeight = elements[arrayPosition].transform.localPosition.y + elementBufferHeight;
 
         toShift.transform.localPosition = new Vector2(toShift.transform.localPosition.x, toShiftHeight);
-        infoScript.FillWithInfo(toShift, currentPosition-1);
+        toShift.GetComponent<Button>().onClick.RemoveAllListeners();
+        int localPositionIndex = currentPosition - 1;
+        toShift.GetComponent<Button>().onClick.AddListener(() => ShowPreviewModal(ClampToArraySize(localArrayIndex, elements.Length), localPositionIndex));
+        infoScript.FillWithInfo(toShift, localPositionIndex);
+
 
         arrayPosition = ClampToArraySize(arrayPosition - 1, elements.Length);
+        currentPosition--;
     }
     private void ShiftDown()
     {
-        if (IsOOB())
-        {
-            return;
-        }
         Debug.Log("shifting DOWN");
 
         //Get top element
-        GameObject toShift = elements[arrayPosition];
-        float toShiftHeight = elements[ClampToArraySize(arrayPosition + elements.Length - 1, elements.Length)].transform.localPosition.y - elementBufferHeight;
+        int localArrayIndex = arrayPosition;
+        GameObject toShift = elements[localArrayIndex];
+        GameObject toShiftBelow = elements[ClampToArraySize(arrayPosition + elements.Length - 1, elements.Length)];
+        float toShiftHeight = toShiftBelow.transform.localPosition.y - elementBufferHeight;
 
         toShift.transform.localPosition = new Vector2(toShift.transform.localPosition.x, toShiftHeight);
-        infoScript.FillWithInfo(toShift, currentPosition+elements.Length-1);
+        toShift.GetComponent<Button>().onClick.RemoveAllListeners();
+        int localPositionIndex = currentPosition + elements.Length;
+        toShift.GetComponent<Button>().onClick.AddListener(() => ShowPreviewModal(localArrayIndex, localPositionIndex));
+        infoScript.FillWithInfo(toShift, localPositionIndex);
 
         arrayPosition = ClampToArraySize(arrayPosition + 1, elements.Length);
+        currentPosition++;
     }
     private bool IsOOB()
     {
         return currentPosition <= 0 || currentPosition + Mathf.CeilToInt(elementsInView) + bufferSize >= elementCount;
+    }
+    private bool IsAtTop()
+    {
+        return currentPosition <= 0;
+    }
+    private bool IsAtBottom()
+    {
+        return currentPosition + Mathf.CeilToInt(elementsInView) + bufferSize * 2 >= elementCount;
     }
     private int ClampToArraySize(int unclamped, int length)
     {
