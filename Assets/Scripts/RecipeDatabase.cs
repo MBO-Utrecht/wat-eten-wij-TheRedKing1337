@@ -5,16 +5,19 @@ using UnityEngine;
 [System.Serializable]
 public class RecipeDatabase
 {
-    public Recipe[] recipes = new Recipe[0];
+    public Recipe[] recipes;
 
     public void AddNew(Recipe recipe)
     {
-        Recipe[] newArray = new Recipe[recipes.Length + 1];
-        for(int i = 0; i < recipes.Length; i++)
+        int length;
+        if (recipes == null) length = 1;
+        else length = recipes.Length + 1;
+        Recipe[] newArray = new Recipe[length];
+        for (int i = 0; i < length - 1; i++)
         {
             newArray[i] = recipes[i];
         }
-        newArray[recipes.Length] = recipe;
+        newArray[length-1] = recipe;
         recipes = newArray;
     }
 }

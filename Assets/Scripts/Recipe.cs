@@ -16,6 +16,10 @@ public class Recipe : ScriptableObject
     public string description;
     public int cookTime;
 
+    public Recipe()
+    {
+
+    }
     public Recipe(RecipeType recipeType, string name, string description, int cookTime)
     {
         this.ID = (int)DateTimeOffset.Now.ToUnixTimeSeconds();

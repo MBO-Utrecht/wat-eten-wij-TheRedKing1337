@@ -92,6 +92,8 @@ public class ListScrollView : MonoBehaviour
         //Resize the content
         content.sizeDelta = new Vector2(content.sizeDelta.x, (elementBufferHeight) * elementCount);
         content.transform.position = new Vector3(content.transform.position.x, 0, 0);
+        arrayPosition = 0;
+        currentPosition = 0;
 
         return elements;
     }
@@ -122,13 +124,13 @@ public class ListScrollView : MonoBehaviour
         if (toggleAtEnd)
             previewModal.gameObject.SetActive(false);
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(new Vector3(0, bottomEdge, 0), new Vector3(1000, bottomEdge, 0));
-        Gizmos.DrawLine(new Vector3(0, topEdge, 0), new Vector3(1000, topEdge, 0));
-        Gizmos.DrawCube(rectTransform.transform.position, Vector3.one);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(new Vector3(0, bottomEdge, 0), new Vector3(1000, bottomEdge, 0));
+    //    Gizmos.DrawLine(new Vector3(0, topEdge, 0), new Vector3(1000, topEdge, 0));
+    //    Gizmos.DrawCube(rectTransform.transform.position, Vector3.one*50);
+    //}
     private void CheckBounds(Vector2 position)
     {
         //float height = content.transform.localPosition.y + elementBufferHeight;

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.IO;
+using System.Xml.Serialization;
 
 public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
 {
@@ -39,20 +40,36 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
     }
 
     private int selectedModal = int.MaxValue; //MaxValue to signify none selected
-    private int selectedListModal = int.MaxValue;
 
     private void Start()
     {
         presetRecipes = Resources.LoadAll<Recipe>("PresetRecipes").ToList();
 
-        string dataAsJson = PlayerPrefs.GetString("Recipes");
-        recipeDatabase = JsonUtility.FromJson<RecipeDatabase>(dataAsJson);
-        if (recipeDatabase is null)
+        try
         {
+            string recipesString = PlayerPrefs.GetString("Recipes");
+            XmlSerializer xml = new XmlSerializer(typeof(RecipeDatabase));
+            StringReader reader = new StringReader(recipesString);
+            recipeDatabase = (RecipeDatabase)xml.Deserialize(reader);
+        }
+        catch
+        {
+            PlayerPrefs.DeleteKey("Recipes");
             recipeDatabase = new RecipeDatabase();
         }
 
-        combinedList = presetRecipes.Concat(recipeDatabase.recipes).ToList();
+        if (recipeDatabase.recipes == null) combinedList = presetRecipes;
+        else combinedList = presetRecipes.Concat((recipeDatabase.recipes).ToList()).ToList();
+
+        for(int i= combinedList.Count-1; i > -1; i--)
+        {
+            if(combinedList[i] == null)
+            {
+                combinedList.RemoveAt(i);
+            }
+        }
+
+
 
         //Load Daily preferences from PlayerPrefs
         int encodedValues = PlayerPrefs.GetInt("DailyPreferences", int.MaxValue);
@@ -71,7 +88,7 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
             options.Add(new TMP_Dropdown.OptionData(((RecipeType)i).ToString(), Resources.Load<Sprite>("RecipeTypeImages/" + ((RecipeType)i).ToString())));
         }
         recipeListCanvas.transform.GetChild(1).GetChild(1).GetComponent<TMP_Dropdown>().options = options;
-        options.RemoveAt(options.Count-1);
+        options.RemoveAt(options.Count - 1);
         options.Add(new TMP_Dropdown.OptionData("None"));
         sortDropdown.options = options;
         sortDropdown.value = (int)RecipeType.Random;
@@ -225,9 +242,10 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
     }
     public void SaveRecipes()
     {
-        string dataAsJson = JsonUtility.ToJson(recipeDatabase);
-
-        PlayerPrefs.SetString("Recipes", dataAsJson);
+        XmlSerializer xml = new XmlSerializer(typeof(RecipeDatabase));
+        StringWriter writer = new StringWriter();
+        xml.Serialize(writer, recipeDatabase);
+        PlayerPrefs.SetString("Recipes", writer.ToString());
     }
 
     private IEnumerator ResizeModal(GameObject modal, float time, float newSize)
@@ -264,6 +282,10 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
 
         Recipe recipe = new Recipe(recipeType, name, description, cookTime);
         recipeDatabase.AddNew(recipe);
+        combinedList.Add(recipe);
+        SaveRecipes();
+        SortPreviewList((int)RecipeType.Random);
+        sortDropdown.value = (int)RecipeType.Random;
 
         inputPanel.gameObject.SetActive(false);
     }
