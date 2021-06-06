@@ -9,23 +9,24 @@ using System.Xml.Serialization;
 
 public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
 {
+    //A debug button for calling functions from editor GUI
     [InspectorButton("SaveRecipes")]
     public bool saveRecipes;
 
     [Header("User settings")]
-    [SerializeField] private RecipeType[] dailyTypes;
+    [SerializeField] private RecipeType[] dailyTypes; //The preferred recipeTypes per day
     [Header("References")]
-    [SerializeField] private Button[] recipeModals;
-    [SerializeField] private Button toggleRecipeListButton;
-    [SerializeField] private Button refreshButton;
-    [SerializeField] private Button preferencesButton;
-    [SerializeField] private Button savePreferencesButton;
-    [SerializeField] private Button addNewButton;
-    [SerializeField] private TMP_Dropdown sortDropdown;
-    [SerializeField] private GameObject[] dailyTypeSelectTabs;
-    [SerializeField] private ListScrollView recipeScollView;
+    [SerializeField] private Button[] recipeModals; //The daily modals
+    [SerializeField] private Button toggleRecipeListButton; //toggle recipes list
+    [SerializeField] private Button refreshButton; //get a new random weekyl selection
+    [SerializeField] private Button preferencesButton; //toggle preferences
+    [SerializeField] private Button savePreferencesButton; //save preferences
+    [SerializeField] private Button addNewButton; //add a new recipe
+    [SerializeField] private TMP_Dropdown sortDropdown; //sort recipes list
+    [SerializeField] private GameObject[] dailyTypeSelectTabs; //preferred recipeTypes per day
+    [SerializeField] private ListScrollView recipeScollView; //the recipe scroll view
 
-    [SerializeField] private GameObject recipeListCanvas;
+    [SerializeField] private GameObject recipeListCanvas; 
     [SerializeField] private GameObject weeklyCanvas;
 
     private Recipe[] weeklyRecipes;
@@ -43,8 +44,10 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
 
     private void Start()
     {
+        //Load the preset recipes from resources
         presetRecipes = Resources.LoadAll<Recipe>("PresetRecipes").ToList();
 
+        //Try loading user made recipes from playerprefs, if bad data delete data (for removing old JSON data)
         try
         {
             string recipesString = PlayerPrefs.GetString("Recipes");
@@ -58,9 +61,11 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
             recipeDatabase = new RecipeDatabase();
         }
 
+        //Get the combined list
         if (recipeDatabase.recipes == null) combinedList = presetRecipes;
         else combinedList = presetRecipes.Concat((recipeDatabase.recipes).ToList()).ToList();
 
+        //Remove null elements from bad parsing (outdated I think)
         for(int i= combinedList.Count-1; i > -1; i--)
         {
             if(combinedList[i] == null)
@@ -81,7 +86,7 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
             }
         }
 
-        //Init the button onClicks
+        //Init the dropdown menus
         List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
         for (int i = 0; i < (int)RecipeType.Length; i++)
         {
@@ -93,6 +98,8 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         sortDropdown.options = options;
         sortDropdown.value = (int)RecipeType.Random;
         sortDropdown.onValueChanged.AddListener(SortPreviewList);
+
+        //Init the button onClicks
         for (int i = 0; i < 7; i++)
         {
             int index = i;
@@ -112,11 +119,12 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         previewList = combinedList;
         recipeScollView.InitElements(this, previewList.Count);
 
+        //Set the default values incase changed in editor
         recipeListCanvas.SetActive(false);
         weeklyCanvas.SetActive(true);
         toggleRecipeListButton.transform.GetChild(0).GetComponent<TMP_Text>().text = "Recipe List";
 
-        //load weeklyRecipes from playerPrefs
+        //if has refreshed in the last week load weeklyRecipes from playerPrefs
         int lastRefresh = PlayerPrefs.GetInt("LastRefresh");
         int nextWeek = lastRefresh + 604800;
         if (nextWeek > (int)System.DateTimeOffset.Now.ToUnixTimeSeconds())
@@ -128,6 +136,7 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
                 weeklyRecipes[i] = combinedList.Where(x => x.ID == dailyID).FirstOrDefault();
             }
         }
+        //Else generate a new list
         else
         {
             GenerateWeeklyList();
@@ -136,6 +145,9 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         UpdateUI();
     }
 
+    /// <summary>
+    /// Toggles between weekly view and recipe list
+    /// </summary>
     private void ToggleRecipeList()
     {
         if (recipeListCanvas.activeSelf)
@@ -159,6 +171,9 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
             sortDropdown.gameObject.SetActive(true);
         }
     }
+    /// <summary>
+    /// Generates a new random weekly list
+    /// </summary>
     public void GenerateWeeklyList()
     {
         //Get array of random recipes based on the daily types
@@ -191,6 +206,9 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         }
         UpdateUI();
     }
+    /// <summary>
+    /// Updates the weekly view
+    /// </summary>
     private void UpdateUI()
     {
         for (int i = 0; i < 7; i++)
@@ -207,6 +225,10 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
             recipeModals[i].transform.GetChild(5).GetChild(0).GetComponent<TMP_Text>().text = ((DaysOfTheWeek)i).ToString();
         }
     }
+    /// <summary>
+    /// Grows/Shrinks daily recipe view to closer inspect
+    /// </summary>
+    /// <param name="id"></param>
     public void SelectRecipe(int id)
     {
         if (selectedModal == id)
@@ -223,10 +245,16 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         selectedModal = id;
         StartCoroutine(ResizeModal(recipeModals[id].gameObject, 0.25f, 1200));
     }
+    /// <summary>
+    /// Toggles daily preferences menu
+    /// </summary>
     public void ShowPreferences()
     {
         dailyTypeSelectTabs[0].transform.parent.gameObject.SetActive(!dailyTypeSelectTabs[0].transform.parent.gameObject.activeSelf);
     }
+    /// <summary>
+    /// Saves the chosen daily preferences
+    /// </summary>
     public void SavePreferences()
     {
         int encodedPreferences = 0;
@@ -240,6 +268,9 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         dailyTypeSelectTabs[0].transform.parent.gameObject.SetActive(false);
         GenerateWeeklyList();
     }
+    /// <summary>
+    /// Saves the user made recipes
+    /// </summary>
     public void SaveRecipes()
     {
         XmlSerializer xml = new XmlSerializer(typeof(RecipeDatabase));
@@ -247,7 +278,9 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         xml.Serialize(writer, recipeDatabase);
         PlayerPrefs.SetString("Recipes", writer.ToString());
     }
-
+    /// <summary>
+    /// Resizes a modals preferredHeight to given height in given time
+    /// </summary>
     private IEnumerator ResizeModal(GameObject modal, float time, float newSize)
     {
         LayoutElement layoutElement = modal.GetComponent<LayoutElement>();
@@ -261,6 +294,9 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         }
     }
 
+    /// <summary>
+    /// Fills a modal with info from the previewList List by the given index
+    /// </summary>
     public void FillWithInfo(GameObject toFill, int index)
     {
         toFill.transform.GetChild(0).GetComponent<TMP_Text>().text = previewList[index].name;
@@ -272,6 +308,9 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
         toFill.transform.GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeImages/" + previewList[index].name);
         toFill.transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>("RecipeTypeImages/" + previewList[index].recipeType.ToString());
     }
+    /// <summary>
+    /// Gets the input recipe data from form and adds it to user made recipes
+    /// </summary>
     public void SaveNewRecipe()
     {
         Transform inputPanel = recipeListCanvas.transform.GetChild(1);
@@ -289,6 +328,9 @@ public class WeeklyRecipePlan : MonoBehaviour, IListScollViewController
 
         inputPanel.gameObject.SetActive(false);
     }
+    /// <summary>
+    /// Sets the previewList List to only the given type
+    /// </summary>
     public void SortPreviewList(int previewType)
     {
         if (previewType == (int)RecipeType.Random) previewList = combinedList;

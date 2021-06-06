@@ -7,24 +7,26 @@ public interface IListScollViewController
     public void FillWithInfo(GameObject toFill, int index);
 }
 /// <summary>
-/// A class that builds a scroll view based on a finite list
+/// A dynamic scroll view class that builds a scroll view based on a finite list, it needs an IListScollViewController to fill the elements with data
+/// Because the interface handles the data this class works with any data/prefab type
+/// Wanted to use Generics but doesnt work well with MonoBehaviour so had to use interface
 /// It also recycles the elements in the list
 /// </summary>
 [RequireComponent(typeof(ScrollRect))]
 public class ListScrollView : MonoBehaviour
 {
-    [SerializeField] private float elementsInView = 5;
-    [SerializeField] private float padding = 5;
-    [SerializeField] private int bufferSize = 1;
-    [SerializeField] private float previewScaleSpeed = 0.2f;
-    [SerializeField] private GameObject elementPrefab;
+    [SerializeField] private float elementsInView = 5; //number of elements visible
+    [SerializeField] private float padding = 5; //amount of padding between elements
+    [SerializeField] private int bufferSize = 1; //amount of buffer elements at top/bottom
+    [SerializeField] private float previewScaleSpeed = 0.2f; //how fast the inspect view scales up/down
+    [SerializeField] private GameObject elementPrefab; //the prefab for the elements
 
     private IListScollViewController infoScript;
     private int elementCount;
     private GameObject[] elements;
     private RectTransform content;
     private int currentPosition = 0; //The ID of the top element
-    private int arrayPosition = 0;
+    private int arrayPosition = 0; //The array position of the top element
     private float elementBufferHeight;
     private RectTransform rectTransform;
     private RectTransform viewport;
@@ -67,6 +69,7 @@ public class ListScrollView : MonoBehaviour
             elementsToPlace = elementCount;
         }
 
+        //Place all the elements in order
         for (int i = 0; i < elementsToPlace; i++)
         {
             GameObject element = Instantiate(elementPrefab);
@@ -86,6 +89,7 @@ public class ListScrollView : MonoBehaviour
             infoScript.FillWithInfo(element, i);
         }
 
+        //Get the lists bounds
         bottomEdge = rectTransform.position.y + rectTransform.rect.yMin * transform.root.localScale.y - elementBufferHeight * bufferSize;
         topEdge = rectTransform.position.y + rectTransform.rect.yMax * transform.root.localScale.y + elementBufferHeight * bufferSize;
 
@@ -97,6 +101,9 @@ public class ListScrollView : MonoBehaviour
 
         return elements;
     }
+    /// <summary>
+    /// Shows a preview of an element when clicked
+    /// </summary>
     public void ShowPreviewModal(int arrayIndex, int positionIndex)
     {
         infoScript.FillWithInfo(previewModal.gameObject, positionIndex); //Set info
@@ -105,10 +112,16 @@ public class ListScrollView : MonoBehaviour
         previewModalReturnPos = elements[arrayIndex].transform.position.y; //Set return position for when closing
         StartCoroutine(ScalePreviewModal(elementBufferHeight, viewport.rect.height, transform.position.y, false));
     }
+    /// <summary>
+    /// Hides the preview modal
+    /// </summary>
     public void HidePreviewModal()
     {
         StartCoroutine(ScalePreviewModal(viewport.rect.height, elementBufferHeight, previewModalReturnPos, true));
     }
+    /// <summary>
+    /// Scales the preview modal up/down
+    /// </summary>
     private IEnumerator ScalePreviewModal(float startHeight, float endHeight, float targetHeightPos, bool toggleAtEnd)
     {
         float t = 0;
@@ -131,6 +144,10 @@ public class ListScrollView : MonoBehaviour
     //    Gizmos.DrawLine(new Vector3(0, topEdge, 0), new Vector3(1000, topEdge, 0));
     //    Gizmos.DrawCube(rectTransform.transform.position, Vector3.one*50);
     //}
+
+    /// <summary>
+    /// Called by scroll view, checks if elements need to be moved up/down
+    /// </summary>
     private void CheckBounds(Vector2 position)
     {
         //float height = content.transform.localPosition.y + elementBufferHeight;
@@ -164,6 +181,9 @@ public class ListScrollView : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Shifts the bottom element up
+    /// </summary>
     private void ShiftUp()
     {
         Debug.Log("shifting UP");
@@ -183,6 +203,9 @@ public class ListScrollView : MonoBehaviour
         arrayPosition = ClampToArraySize(arrayPosition - 1, elements.Length);
         currentPosition--;
     }
+    /// <summary>
+    /// Shifts the top element down
+    /// </summary>
     private void ShiftDown()
     {
         Debug.Log("shifting DOWN");
@@ -202,18 +225,26 @@ public class ListScrollView : MonoBehaviour
         arrayPosition = ClampToArraySize(arrayPosition + 1, elements.Length);
         currentPosition++;
     }
-    private bool IsOOB()
-    {
-        return currentPosition <= 0 || currentPosition + Mathf.CeilToInt(elementsInView) + bufferSize >= elementCount;
-    }
+    /// <summary>
+    /// Checks if list is at top, used to prevent items appearing above top element
+    /// </summary>
     private bool IsAtTop()
     {
         return currentPosition <= 0;
     }
+    /// <summary>
+    /// Checks if list is at bottom, used to prevent items appearing below bottom element
+    /// </summary>
     private bool IsAtBottom()
     {
         return currentPosition + Mathf.CeilToInt(elementsInView) + bufferSize * 2 >= elementCount;
     }
+    /// <summary>
+    /// Cycles an index within the bounds of an array, ex (5,3) would return 1 because 5 is 2 bigger than 3, so the second index if cycled
+    /// </summary>
+    /// <param name="unclamped">Index to be clamped</param>
+    /// <param name="length">Length of the array</param>
+    /// <returns>An index cycled within bounds of array</returns>
     private int ClampToArraySize(int unclamped, int length)
     {
         while (unclamped >= length)
